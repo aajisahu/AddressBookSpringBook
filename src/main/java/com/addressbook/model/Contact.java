@@ -1,6 +1,5 @@
 package com.addressbook.model;
 
-
 import com.addressbook.dto.ContactDTO;
 
 public class Contact {
