@@ -11,17 +11,27 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@ControllerAdvice
-public class AddressBookAppExceptionHandler {
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ResponseDTO> handleMethodArgumentNotValidException(
-            MethodArgumentNotValidException exception) {
-        List<ObjectError> errorList = exception.getBindingResult().getAllErrors();
-        List<String> errorMessage = errorList.stream().map(objerr -> objerr.getDefaultMessage())
-                .collect(Collectors.toList());
+    @ControllerAdvice
+    public class AddressBookAppExceptionHandler {
 
-        ResponseDTO responseDTO = new ResponseDTO("Exception while processing REST request", errorMessage);
-        return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.BAD_REQUEST);
+        @ExceptionHandler(MethodArgumentNotValidException.class)
+        public ResponseEntity<ResponseDTO> handleMethodArgumentNotValidException(
+                MethodArgumentNotValidException exception) {
+            List<ObjectError> errorList = exception.getBindingResult().getAllErrors();
+            List<String> errorMessage = errorList.stream().map(objerr -> objerr.getDefaultMessage())
+                    .collect(Collectors.toList());
+
+            ResponseDTO responseDTO = new ResponseDTO("Exception while processing REST request", errorMessage);
+            return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.BAD_REQUEST);
+        }
+
+        @ExceptionHandler(AddressBookException.class)
+        public ResponseEntity<ResponseDTO> handleEmployeePayrollException(
+                AddressBookException exception) {
+            ResponseDTO responseDTO = new ResponseDTO("Exception while REST Request",
+                    exception.getMessage());
+            return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.BAD_REQUEST);
+        }
+
     }
-}
