@@ -1,6 +1,6 @@
 package com.addressbook.dto;
 
-import org.intellij.lang.annotations.Pattern;
+
 import javax.validation.constraints.Pattern;
 
 public class ContactDTO {
