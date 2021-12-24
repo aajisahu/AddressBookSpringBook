@@ -5,6 +5,7 @@ import com.addressbook.model.Contact;
 
 import java.util.List;
 
+
 public interface IAddressBookService {
     List<Contact> getContact();
 
@@ -14,5 +15,5 @@ public interface IAddressBookService {
 
     Contact updateContact(int contactId, ContactDTO contactDTO);
 
-    void deleteContact(int contactId);
+
 }
